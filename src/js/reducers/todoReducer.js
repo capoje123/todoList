@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK, STATUS_TASK } from "../const/const";
+import { ADD_TASK, DELETE_TASK, EDIT_TASK, STATUS_TASK } from "../const/const";
 
 const initialState={todos:[{id:1,description:"drink coffe",isDone:false},{id:2,description:" task 2",isDone:true}]}
 
@@ -10,6 +10,8 @@ switch (action.type) {
         return{...state,todos:state.todos.filter(el=>el.id!==action.payload)}  
 case STATUS_TASK:
     return{...state,todos:state.todos.map(el=>el.id==action.payload?{...el,isDone:!el.isDone}:el)}
+    case EDIT_TASK:
+      return{...state,todos:state.todos.map(el=>el.id==action.payload.id?{...el,description:action.payload.newDesc}:el)}
     default:
         return state
         
